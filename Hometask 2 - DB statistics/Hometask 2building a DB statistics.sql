@@ -6,38 +6,43 @@ CREATE PROCEDURE Statistics_pr -- create procedure with input parameters
     @p_SchemaName NVARCHAR(MAX),
     @p_TableName NVARCHAR(MAX)
 AS
-DECLARE @v_TablesList TABLE ([Table_Name] VARCHAR(100), [Column_name]VARCHAR(100)); --create temporary table with list of tables and colunms
+Declare @v_PreQuery  NVARCHAR(MAX)
+drop table if exists ##v_TablesList;
+create table ##v_TablesList  ([Table_Name] VARCHAR(100), [Column_name]VARCHAR(100)); --create temporary table with list of tables and colunms
+--DECLARE @v_TablesList TABLE ([Table_Name] VARCHAR(100), [Column_name]VARCHAR(100)); --create temporary table with list of tables and colunms
+
+
 	if @p_TableName ='%'
 		begin 
-			INSERT
-			INTO @v_TablesList
+			SET @v_PreQuery ='INSERT
+			INTO ##v_TablesList
 			SELECT   o.Name as table_name, c.Name as column_name
-			FROM     sys.columns c 
-			JOIN sys.objects o ON o.object_id = c.object_id 
-			join INFORMATION_SCHEMA.TABLES i on i.TABLE_NAME = o.name
-			join sys.schemas s on SCHEMA_NAME(s.schema_id) = i.TABLE_SCHEMA
-			where DB_NAME() = @p_DatabaseName
-			and  o.type = 'U' --and i.TABLE_SCHEMA = 'hr'
-			and i.TABLE_SCHEMA = @p_SchemaName
-			ORDER BY o.Name, c.Name;
+			FROM     '+@p_DatabaseName+'.sys.columns c 
+			JOIN '+@p_DatabaseName+'.sys.objects o ON o.object_id = c.object_id 
+			join '+@p_DatabaseName+'.INFORMATION_SCHEMA.TABLES i on i.TABLE_NAME = o.name
+			join '+@p_DatabaseName+'.sys.schemas s on s.name = i.TABLE_SCHEMA
+			where 
+			 o.type = ''U'' 
+			and i.TABLE_SCHEMA = '''+@p_SchemaName+'''
+			ORDER BY o.Name, c.Name;'
 		end; 
 	else
 		begin 
-			INSERT
-			INTO @v_TablesList
+			 SET @v_PreQuery = 
+			 'INSERT
+			INTO ##v_TablesList
 			SELECT   o.Name as table_name, c.Name as column_name
-			FROM     sys.columns c 
-			JOIN sys.objects o ON o.object_id = c.object_id  
-			join INFORMATION_SCHEMA.TABLES i on i.TABLE_NAME = o.name 
-			join sys.schemas s on SCHEMA_NAME(s.schema_id) = i.TABLE_SCHEMA
-			where DB_NAME() = @p_DatabaseName
-			and  o.name = @p_TableName
-			ORDER BY o.Name, c.Name;
+			FROM      '+@p_DatabaseName+'.sys.columns c 
+			JOIN  '+@p_DatabaseName+'.sys.objects o ON o.object_id = c.object_id  
+			join  '+@p_DatabaseName+'.INFORMATION_SCHEMA.TABLES i on i.TABLE_NAME = o.name 
+			join  '+@p_DatabaseName+'.sys.schemas s on s.name = i.TABLE_SCHEMA
+			where  o.name = '''+@p_TableName+''' 
+			ORDER BY o.Name, c.Name;'
 		end; 
 
 
-
-
+EXEC SP_EXECUTESQL @v_PreQuery;
+Select * from  ##v_TablesList;
 DECLARE @v_Query NVARCHAR(MAX); -- char for query
 WITH
 	tbl_list AS
@@ -45,7 +50,7 @@ WITH
 		SELECT
 			[Table_Name],[Column_name]
 			,LEAD([Column_name]) OVER (ORDER BY [Table_Name],[Column_name]) [lead_row] -- use lead to check if it is last record in temporary table
-		FROM @v_TablesList
+		FROM ##v_TablesList
 	),
 query_not_agg AS( -- generate query
 SELECT
@@ -68,28 +73,28 @@ SELECT
 	' CAST(( select  t6."% rows with most used value") as numeric(6,2))  AS "% rows with most used value",'+ --persent of most used value in column
 	'cast (t7."MIN value"as varchar) AS "MIN value", cast (t7."MAX value"as varchar) AS "MAX Value"'+ -- min and max value in column
 	'FROM (select COUNT(*) AS "Count of NULL values" '+
-	'FROM  ['+@p_SchemaName+'].[' +[Table_Name]+ '] '+
+	'FROM ['+@p_DatabaseName+']. ['+@p_SchemaName+'].[' +[Table_Name]+ '] '+
 	' WHERE '+ [Column_name]+' IS NULL) AS t1 ' -- subquery for calculating count of null values
 	+'JOIN (SELECT SUM(CASE 
              WHEN ISNUMERIC(cast ('+[Column_name]+' as varchar)) = 1 AND cast ('+[Column_name]+'  as varchar ) =  ''0'' THEN 1 
              WHEN ISNUMERIC(cast ('+[Column_name]+' as varchar)) = 0 AND cast ('+[Column_name]+'  as varchar) =  '''' THEN 1 
 			 ELSE 0
            END) AS "Count of empty/zero values" 
-FROM  ['+@p_SchemaName+'].[' +[Table_Name]+ '])  AS t2 ON 1=1 '+ -- subquery for calculating count of empty or zero values
+FROM  ['+@p_DatabaseName+'].['+@p_SchemaName+'].[' +[Table_Name]+ '])  AS t2 ON 1=1 '+ -- subquery for calculating count of empty or zero values
 'JOIN (SELECT SUM(CASE 
 			WHEN (ISNUMERIC(cast ('+[Column_name]+' as varchar)) = 0) THEN 0
              WHEN (ISNUMERIC(cast ('+[Column_name]+' as varchar)) = 0 AND Upper('+[Column_name]+') COLLATE Latin1_General_CS_AS = '+[Column_name]+' ) THEN 1 
 			 ELSE 0
 			 END)
            AS "Only UPPERCASE strings"  
-FROM  ['+@p_SchemaName+'].[' +[Table_Name]+ ']) AS t3 ON 1 = 1 '+ -- subquery for calculating only uppercase strings
+FROM  ['+@p_DatabaseName+'].['+@p_SchemaName+'].[' +[Table_Name]+ ']) AS t3 ON 1 = 1 '+ -- subquery for calculating only uppercase strings
 'JOIN (SELECT SUM(CASE 
 			WHEN (ISNUMERIC(cast ('+[Column_name]+' as varchar)) = 0) THEN 0
              WHEN (ISNUMERIC(cast ('+[Column_name]+' as varchar)) = 0 AND Lower('+[Column_name]+') COLLATE Latin1_General_CS_AS = '+[Column_name]+' ) THEN 1 
 			 ELSE 0
 			 END)
            AS "Only LOWERCASE strings"  
-FROM  ['+@p_SchemaName+'].[' +[Table_Name]+ ']) AS t4 ON 1 = 1 '  -- subquery for calculating only lowercase strings
+FROM  ['+@p_DatabaseName+'].['+@p_SchemaName+'].[' +[Table_Name]+ ']) AS t4 ON 1 = 1 '  -- subquery for calculating only lowercase strings
 +'JOIN (
 SELECT SUM (
 CASE WHEN (ISNUMERIC(cast ('+[Column_name]+' as varchar)) = 1) THEN 0
@@ -98,24 +103,24 @@ WHEN (ISNUMERIC(cast ('+[Column_name]+' as varchar)) = 0) AND
 OR PATINDEX(''['+ CHAR(10)+ Char(13)+ Char(9)  + ' ]%'', REVERSE(cast ( '+[Column_name]+' as varchar)))=1) THEN 1
 ELSE 0
 END) AS "Rows with non-printable characters at the beginning/end"
-FROM ['+@p_SchemaName+'].[' +[Table_Name]+ ']) AS t5 ON 1=1 '  -- subquery for calculating Rows with non-printable characters at the beginning/end
+FROM ['+@p_DatabaseName+'].['+@p_SchemaName+'].[' +[Table_Name]+ ']) AS t5 ON 1=1 '  -- subquery for calculating Rows with non-printable characters at the beginning/end
 +' JOIN (
 SELECT '+[Column_name] +' AS "Most used value", COUNT(*) AS count , 
        COUNT(*) * 100.0 / SUM(COUNT(*)) OVER() AS "% rows with most used value",
        SUM(CASE WHEN ' +[Column_name] + '  = popular_value THEN 1 ELSE 0 END) AS popular_count
-FROM ['+@p_SchemaName+'].[' +[Table_Name]+ ']
+FROM ['+@p_DatabaseName+'].['+@p_SchemaName+'].[' +[Table_Name]+ ']
 CROSS APPLY (SELECT TOP 1 ' +[Column_name] + ' AS popular_value
-             FROM ['+@p_SchemaName+'].[' +[Table_Name]+ ']
+             FROM ['+@p_DatabaseName+'].['+@p_SchemaName+'].[' +[Table_Name]+ ']
              GROUP BY ' +[Column_name] + '
              ORDER BY COUNT(*) DESC) AS most_popular
 GROUP BY  ' +[Column_name] + '
-)  AS t6  -- subquery for calculating most popular value and persent of it value
-ON t6.popular_count !=0 '
+)  AS t6'  -- subquery for calculating most popular value and persent of it value
++' ON t6.popular_count !=0 '
 +'JOIN  (
 SELECT MIN('+[Column_name]+') AS "MIN value", MAX('+[Column_name]+') AS "MAX value"
-FROM ['+@p_SchemaName+'].[' +[Table_Name]+ '])  AS t7 ON 1 = 1' -- subquery for calculating max and min value
-		+'JOIN ['+@p_SchemaName+'].[' +[Table_Name]+ ']  t ON 1=1 '+
-	'JOIN INFORMATION_SCHEMA.COLUMNS i ON i.TABLE_SCHEMA = '''+ @p_SchemaName+ 
+FROM ['+@p_DatabaseName+'].['+@p_SchemaName+'].[' +[Table_Name]+ '])  AS t7 ON 1 = 1' -- subquery for calculating max and min value
+		+'JOIN ['+@p_DatabaseName+'].['+@p_SchemaName+'].[' +[Table_Name]+ ']  t ON 1=1 '+
+	'JOIN ['+@p_DatabaseName+'].INFORMATION_SCHEMA.COLUMNS i ON i.TABLE_SCHEMA = '''+ @p_SchemaName+ 
 	''' AND i.TABLE_NAME = ''' +[Table_Name]+''''+
 	' AND i.COLUMN_NAME = '''+ [Column_name]+ ''''+
 	'  GROUP BY  i.data_type,   t1."Count of NULL values", t2."Count of empty/zero values",t3."Only UPPERCASE strings", t4."Only LOWERCASE strings" ,
@@ -138,28 +143,28 @@ FROM ['+@p_SchemaName+'].[' +[Table_Name]+ '])  AS t7 ON 1 = 1' -- subquery for 
 	' CAST(( select  t6."% rows with most used value") as numeric(6,2))  AS "% rows with most used value",'+
 	'cast (t7."MIN value"as varchar) AS "MIN value", cast (t7."MAX value"as varchar) AS "MAX Value"'+
 	'FROM (select COUNT(*) AS "Count of NULL values" '+
-	'FROM  ['+@p_SchemaName+'].[' +[Table_Name]+ '] '+
+	'FROM  ['+@p_DatabaseName+'].['+@p_SchemaName+'].[' +[Table_Name]+ '] '+
 	' WHERE '+ [Column_name]+' IS NULL) AS t1 '
 	+'JOIN (SELECT SUM(CASE 
              WHEN ISNUMERIC(cast ('+[Column_name]+' as varchar)) = 1 AND cast ('+[Column_name]+'  as varchar ) =  ''0'' THEN 1 
              WHEN ISNUMERIC(cast ('+[Column_name]+' as varchar)) = 0 AND cast ('+[Column_name]+'  as varchar) =  '''' THEN 1 
 			 ELSE 0
            END) AS "Count of empty/zero values" 
-FROM  ['+@p_SchemaName+'].[' +[Table_Name]+ '])  AS t2 ON 1=1 '+
+FROM  ['+@p_DatabaseName+'].['+@p_SchemaName+'].[' +[Table_Name]+ '])  AS t2 ON 1=1 '+
 'JOIN (SELECT SUM(CASE 
 			WHEN (ISNUMERIC(cast ('+[Column_name]+' as varchar)) = 0) THEN 0
              WHEN (ISNUMERIC(cast ('+[Column_name]+' as varchar)) = 0 AND Upper('+[Column_name]+') COLLATE Latin1_General_CS_AS = '+[Column_name]+' ) THEN 1 
 			 ELSE 0
 			 END)
            AS "Only UPPERCASE strings"  
-FROM  ['+@p_SchemaName+'].[' +[Table_Name]+ ']) AS t3 ON 1 = 1 '+
+FROM  ['+@p_DatabaseName+'].['+@p_SchemaName+'].[' +[Table_Name]+ ']) AS t3 ON 1 = 1 '+
 'JOIN (SELECT SUM(CASE 
 			WHEN (ISNUMERIC(cast ('+[Column_name]+' as varchar)) = 0) THEN 0
              WHEN (ISNUMERIC(cast ('+[Column_name]+' as varchar)) = 0 AND Lower('+[Column_name]+') COLLATE Latin1_General_CS_AS = '+[Column_name]+' ) THEN 1 
 			 ELSE 0
 			 END)
            AS "Only LOWERCASE strings"  
-FROM  ['+@p_SchemaName+'].[' +[Table_Name]+ ']) AS t4 ON 1 = 1 '
+FROM  ['+@p_DatabaseName+'].['+@p_SchemaName+'].[' +[Table_Name]+ ']) AS t4 ON 1 = 1 '
 +'JOIN (
 SELECT SUM (
 CASE WHEN (ISNUMERIC(cast ('+[Column_name]+' as varchar)) = 1) THEN 0
@@ -168,14 +173,14 @@ WHEN (ISNUMERIC(cast ('+[Column_name]+' as varchar)) = 0) AND
 OR PATINDEX(''['+ CHAR(10)+ Char(13)+ Char(9)  + ' ]%'', REVERSE(cast ( '+[Column_name]+' as varchar)))=1) THEN 1
 ELSE 0
 END) AS "Rows with non-printable characters at the beginning/end"
-FROM ['+@p_SchemaName+'].[' +[Table_Name]+ ']) AS t5 ON 1=1 '
+FROM ['+@p_DatabaseName+'].['+@p_SchemaName+'].[' +[Table_Name]+ ']) AS t5 ON 1=1 '
 +' JOIN (
 SELECT '+[Column_name] +' AS "Most used value", COUNT(*) AS count , 
        COUNT(*) * 100.0 / SUM(COUNT(*)) OVER() AS "% rows with most used value",
        SUM(CASE WHEN ' +[Column_name] + '  = popular_value THEN 1 ELSE 0 END) AS popular_count
-FROM ['+@p_SchemaName+'].[' +[Table_Name]+ ']
+FROM ['+@p_DatabaseName+']. ['+@p_SchemaName+'].[' +[Table_Name]+ ']
 CROSS APPLY (SELECT TOP 1 ' +[Column_name] + ' AS popular_value
-             FROM ['+@p_SchemaName+'].[' +[Table_Name]+ ']
+             FROM ['+@p_DatabaseName+'].['+@p_SchemaName+'].[' +[Table_Name]+ ']
              GROUP BY ' +[Column_name] + '
              ORDER BY COUNT(*) DESC) AS most_popular
 GROUP BY  ' +[Column_name] + '
@@ -183,9 +188,9 @@ GROUP BY  ' +[Column_name] + '
 ON t6.popular_count !=0 '
 +'JOIN  (
 SELECT MIN('+[Column_name]+') AS "MIN value", MAX('+[Column_name]+') AS "MAX value"
-FROM ['+@p_SchemaName+'].[' +[Table_Name]+ '])  AS t7 ON 1 = 1'
-		+'JOIN ['+@p_SchemaName+'].[' +[Table_Name]+ ']  t ON 1=1 '+
-	'JOIN INFORMATION_SCHEMA.COLUMNS i ON i.TABLE_SCHEMA = '''+ @p_SchemaName+ 
+FROM ['+@p_DatabaseName+'].['+@p_SchemaName+'].[' +[Table_Name]+ '])  AS t7 ON 1 = 1'
+		+'JOIN ['+@p_DatabaseName+'].['+@p_SchemaName+'].[' +[Table_Name]+ ']  t ON 1=1 '+
+	'JOIN ['+@p_DatabaseName+'].INFORMATION_SCHEMA.COLUMNS i ON i.TABLE_SCHEMA = '''+ @p_SchemaName+ 
 	''' AND i.TABLE_NAME = ''' +[Table_Name]+''''+
 	' AND i.COLUMN_NAME = '''+ [Column_name]+ ''''+
 	'  GROUP BY  i.data_type,   t1."Count of NULL values", t2."Count of empty/zero values",t3."Only UPPERCASE strings", t4."Only LOWERCASE strings" ,
@@ -199,15 +204,16 @@ SELECT -- form the query
 	@v_Query = STRING_AGG([query_text], '') WITHIN GROUP (ORDER BY [query_text])
 FROM query_not_agg;
 
-
 EXEC SP_EXECUTESQL @v_Query; --execute query
+
 Return;
 GO  
 
 DECLARE @DatabaseName NVARCHAR(max), @SchemaName NVARCHAR(max), @TableName NVARCHAR(max);
 SET @DatabaseName = 'TRN'
 SET @SchemaName = 'hr'
-SET @TableName = '%'
+SET @TableName = 'employees'
 
- 
 EXEC Statistics_pr @DatabaseName, @SchemaName, @TableName -- execute the procedure
+
+
