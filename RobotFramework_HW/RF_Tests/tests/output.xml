@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 6.0.2 (Python 3.11.0 on win32)" generated="20230403 12:21:24.491" rpa="false" schemaversion="3">
+<suite id="s1" name="Tests" source="C:\Users\Anastasiya_Viktarovi\Documents\GitHub\Data-Quality-Engineering-Mentoring-Program-Intermediate-Level-9\RobotFramework_HW\RF_Tests\tests\tests.robot">
+<kw name="Connect To Database" library="DatabaseLibrary" type="SETUP">
+<arg>pymssql</arg>
+<arg>${DBName}</arg>
+<arg>${DBUser}</arg>
+<arg>${DBPass}</arg>
+<arg>${DBHost}</arg>
+<arg>${DBPort}</arg>
+<doc>Loads the DB API 2.0 module given `dbapiModuleName` then uses it to
+connect to the database using `dbName`, `dbUsername`, and `dbPassword`.</doc>
+<msg timestamp="20230403 12:21:24.520" level="INFO">Connecting using : pymssql.connect(database=AdventureWorks2012, user=test_user, password=test_user, host=EPPLWARW01DC\SQLEXPRESS, port=1433) </msg>
+<status status="PASS" starttime="20230403 12:21:24.514" endtime="20230403 12:21:24.550"/>
+</kw>
+<test id="s1-t1" name="Verify the count of records in [Person].[Address] table" line="10">
+<kw name="Query" library="DatabaseLibrary">
+<var>@{result}</var>
+<arg>${query_person_address_count}</arg>
+<doc>Uses the input `selectStatement` to query for the values that will be returned as a list of tuples. Set optional
+input `sansTran` to True to run command without an explicit transaction commit or rollback.
+Set optional input `returnAsDict` to True to return values as a list of dictionaries.</doc>
+<msg timestamp="20230403 12:21:24.551" level="INFO">Executing : Query  |  SELECT COUNT(*) AS count_rows FROM [Person].[Address]; </msg>
+<msg timestamp="20230403 12:21:24.555" level="INFO">@{result} = [ (19614,) ]</msg>
+<status status="PASS" starttime="20230403 12:21:24.550" endtime="20230403 12:21:24.555"/>
+</kw>
+<kw name="Should Not Be Empty" library="BuiltIn">
+<arg>${result}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<msg timestamp="20230403 12:21:24.555" level="INFO">Length is 1</msg>
+<status status="PASS" starttime="20230403 12:21:24.555" endtime="20230403 12:21:24.555"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${result}[0]${column_person_address_count}</arg>
+<arg>${query_person_address_count_result}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20230403 12:21:24.555" endtime="20230403 12:21:24.555"/>
+</kw>
+<doc>| *Setup*:
+| 0.Connect To Database AdventureWorks2012 via pymsql
+|
+| *Test Steps*
+| 0.Query row count for Table Person.Address
+|
+| *Expected result:*
+| 0.Result is not empty
+| 1.Numbers of rows is the same as expected</doc>
+<tag>Table Person.Address</tag>
+<status status="PASS" starttime="20230403 12:21:24.550" endtime="20230403 12:21:24.556"/>
+</test>
+<test id="s1-t2" name="Verify the number of unique cities in [Person].[Address] table" line="26">
+<kw name="Query" library="DatabaseLibrary">
+<var>@{result}</var>
+<arg>${query_person_address_unique_cities}</arg>
+<doc>Uses the input `selectStatement` to query for the values that will be returned as a list of tuples. Set optional
+input `sansTran` to True to run command without an explicit transaction commit or rollback.
+Set optional input `returnAsDict` to True to return values as a list of dictionaries.</doc>
+<msg timestamp="20230403 12:21:24.558" level="INFO">Executing : Query  |  SELECT COUNT(DISTINCT [City]) AS count_cities FROM [Person].[Address]; </msg>
+<msg timestamp="20230403 12:21:24.567" level="INFO">@{result} = [ (575,) ]</msg>
+<status status="PASS" starttime="20230403 12:21:24.558" endtime="20230403 12:21:24.567"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>@{result}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20230403 12:21:24.568" endtime="20230403 12:21:24.568"/>
+</kw>
+<kw name="Should Not Be Empty" library="BuiltIn">
+<arg>${result}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<msg timestamp="20230403 12:21:24.569" level="INFO">Length is 1</msg>
+<status status="PASS" starttime="20230403 12:21:24.569" endtime="20230403 12:21:24.569"/>
+</kw>
+<kw name="Should Contain" library="BuiltIn">
+<arg>${result}[0]${column_unique_cities_count}</arg>
+<arg>${query_person_address_unique_cities_result}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20230403 12:21:24.569" endtime="20230403 12:21:24.569"/>
+</kw>
+<doc>| *Setup*:
+| 0.Connect To Database AdventureWorks2012 via pymsql
+|
+| *Test Steps*
+| 0.Query to calculate number of unique cities in [Person].[Address] table
+|
+| *Expected result:*
+| 0.Result is not empty
+| 1.Numbers of rows is the same as expected</doc>
+<tag>Table Person.Address</tag>
+<status status="PASS" starttime="20230403 12:21:24.558" endtime="20230403 12:21:24.570"/>
+</test>
+<kw name="Disconnect From Database" library="DatabaseLibrary" type="TEARDOWN">
+<doc>Disconnects from the database.</doc>
+<msg timestamp="20230403 12:21:24.571" level="INFO">Executing : Disconnect From Database</msg>
+<status status="PASS" starttime="20230403 12:21:24.571" endtime="20230403 12:21:24.571"/>
+</kw>
+<doc>Contains Test Cases from file TestCasesRF.xlsx</doc>
+<status status="PASS" starttime="20230403 12:21:24.492" endtime="20230403 12:21:24.571"/>
+</suite>
+<statistics>
+<total>
+<stat pass="2" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="2" fail="0" skip="0">Table Person.Address</stat>
+</tag>
+<suite>
+<stat pass="2" fail="0" skip="0" id="s1" name="Tests">Tests</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
