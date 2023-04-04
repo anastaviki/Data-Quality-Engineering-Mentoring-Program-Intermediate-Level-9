@@ -67,13 +67,12 @@ Verify the possible values of [Status] attribute in [Production].[Document] tabl
      ...  | *Expected result:*
      ...  | 0.Result is not empty
      ...  | 1. Count of rows with incorrect [Status] is the same as expected: 0
-
      @{result}=      query      ${query_possible_status}
      Should Not Be Empty    ${result}
      Should Be Equal As Integers    ${result}[0][0]         ${query_possible_status_result}
 
 Verify the maximum value of the [ModifiedDate] column in [Production].[UnitMeasure] table
-     [Tags]     Table [Production].[UnitMeasure]
+     [Tags]     Table Production.UnitMeasure
      [Documentation]
      ...  | *Setup*:
      ...  | 0.Connect To Database AdventureWorks2012 via pymsql
@@ -84,13 +83,12 @@ Verify the maximum value of the [ModifiedDate] column in [Production].[UnitMeasu
      ...  | *Expected result:*
      ...  | 0.Result is not empty
      ...  | 1. The maximum value of the [ModifiedDate] column in [Production].[UnitMeasure] table is the same as expected.
-
      @{result}=      query      ${query_max_modified_date}
      Should Not Be Empty    ${result}
      Should Be Equal As Strings      ${result}[0][0]     ${query_max_modified_date_result}
 
 Verify the numbers of rows in [Production].[UnitMeasure] table with [UnitMeasureCode] with only one symbol
-     [Tags]     Table [Production].[UnitMeasure]
+     [Tags]     Table Production.UnitMeasure
      [Documentation]
      ...  | *Setup*:
      ...  | 0.Connect To Database AdventureWorks2012 via pymsql
@@ -101,7 +99,6 @@ Verify the numbers of rows in [Production].[UnitMeasure] table with [UnitMeasure
      ...  | *Expected result:*
      ...  | 0.Result is not empty
      ...  | 1.Numbers of rows in [Production].[UnitMeasure] table with [UnitMeasureCode] with only one symbol is the same as expected.
-
      @{result}=      query      ${query_numbers_with_one_symbol}
      Should Not Be Empty    ${result}
      Should Be Equal As Strings      ${result}[0][0]     ${query_numbers_with_one_symbol_result}
