@@ -5,5 +5,5 @@ This folder contains Robot Framework project with automated test cases for Adven
 1. Python 3
 2. Robot framework. You can use _pip install robotframework_ to install it 
 ## How to use the project
-1. Go to directory tests
+1. Go to directory RF_Tests/tests
 2. Run test cases you can use _robot tests.robot_ command
