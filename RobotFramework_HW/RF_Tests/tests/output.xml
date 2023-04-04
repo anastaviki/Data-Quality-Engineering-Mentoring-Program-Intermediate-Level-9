@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 6.0.2 (Python 3.11.0 on win32)" generated="20230403 20:18:51.557" rpa="false" schemaversion="3">
+<robot generator="Robot 6.0.2 (Python 3.11.0 on win32)" generated="20230404 20:02:06.295" rpa="false" schemaversion="3">
 <suite id="s1" name="Tests" source="C:\Users\Anastasiya_Viktarovi\Documents\GitHub\Data-Quality-Engineering-Mentoring-Program-Intermediate-Level-9\RobotFramework_HW\RF_Tests\tests\tests.robot">
 <kw name="Connect To Database" library="DatabaseLibrary" type="SETUP">
 <arg>pymssql</arg>
@@ -10,8 +10,8 @@
 <arg>${DBPort}</arg>
 <doc>Loads the DB API 2.0 module given `dbapiModuleName` then uses it to
 connect to the database using `dbName`, `dbUsername`, and `dbPassword`.</doc>
-<msg timestamp="20230403 20:18:51.588" level="INFO">Connecting using : pymssql.connect(database=AdventureWorks2012, user=test_user, password=test_user, host=EPPLWARW01DC\SQLEXPRESS, port=1433) </msg>
-<status status="PASS" starttime="20230403 20:18:51.581" endtime="20230403 20:18:51.619"/>
+<msg timestamp="20230404 20:02:06.326" level="INFO">Connecting using : pymssql.connect(database=AdventureWorks2012, user=test_user, password=test_user, host=EPPLWARW01DC\SQLEXPRESS, port=1433) </msg>
+<status status="PASS" starttime="20230404 20:02:06.319" endtime="20230404 20:02:06.357"/>
 </kw>
 <test id="s1-t1" name="Verify the count of records in [Person].[Address] table" line="10">
 <kw name="Query" library="DatabaseLibrary">
@@ -20,21 +20,24 @@ connect to the database using `dbName`, `dbUsername`, and `dbPassword`.</doc>
 <doc>Uses the input `selectStatement` to query for the values that will be returned as a list of tuples. Set optional
 input `sansTran` to True to run command without an explicit transaction commit or rollback.
 Set optional input `returnAsDict` to True to return values as a list of dictionaries.</doc>
-<msg timestamp="20230403 20:18:51.619" level="INFO">Executing : Query  |  SELECT COUNT(*) AS count_rows FROM [Person].[Address]; </msg>
-<msg timestamp="20230403 20:18:51.621" level="INFO">@{result} = [ (19614,) ]</msg>
-<status status="PASS" starttime="20230403 20:18:51.619" endtime="20230403 20:18:51.621"/>
+<msg timestamp="20230404 20:02:06.358" level="INFO">Executing : Query  |  SELECT COUNT(*) AS count_rows FROM [Person].[Address]; </msg>
+<msg timestamp="20230404 20:02:06.361" level="INFO">@{result} = [ (19614,) ]</msg>
+<status status="PASS" starttime="20230404 20:02:06.358" endtime="20230404 20:02:06.361"/>
 </kw>
 <kw name="Should Not Be Empty" library="BuiltIn">
 <arg>${result}</arg>
 <doc>Verifies that the given item is not empty.</doc>
-<msg timestamp="20230403 20:18:51.621" level="INFO">Length is 1</msg>
-<status status="PASS" starttime="20230403 20:18:51.621" endtime="20230403 20:18:51.621"/>
+<msg timestamp="20230404 20:02:06.361" level="INFO">Length is 1</msg>
+<status status="PASS" starttime="20230404 20:02:06.361" endtime="20230404 20:02:06.361"/>
 </kw>
-<kw name="Should Contain" library="BuiltIn">
-<arg>${result}[0]${column_person_address_count}</arg>
+<kw name="Should Be Equal As Integers" library="BuiltIn">
+<arg>${result}[0][0]</arg>
 <arg>${query_person_address_count_result}</arg>
-<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
-<status status="PASS" starttime="20230403 20:18:51.621" endtime="20230403 20:18:51.622"/>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<msg timestamp="20230404 20:02:06.362" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20230404 20:02:06.361" endtime="20230404 20:02:06.362"/>
 </kw>
 <doc>| *Setup*:
 | 0.Connect To Database AdventureWorks2012 via pymsql
@@ -46,7 +49,7 @@ Set optional input `returnAsDict` to True to return values as a list of dictiona
 | 0.Result is not empty
 | 1.The value with the total number of records in the [Person].[Address] table is the same as expected</doc>
 <tag>Table Person.Address</tag>
-<status status="PASS" starttime="20230403 20:18:51.619" endtime="20230403 20:18:51.622"/>
+<status status="PASS" starttime="20230404 20:02:06.357" endtime="20230404 20:02:06.362"/>
 </test>
 <test id="s1-t2" name="Verify the number of unique cities in [Person].[Address] table" line="26">
 <kw name="Query" library="DatabaseLibrary">
@@ -55,21 +58,24 @@ Set optional input `returnAsDict` to True to return values as a list of dictiona
 <doc>Uses the input `selectStatement` to query for the values that will be returned as a list of tuples. Set optional
 input `sansTran` to True to run command without an explicit transaction commit or rollback.
 Set optional input `returnAsDict` to True to return values as a list of dictionaries.</doc>
-<msg timestamp="20230403 20:18:51.623" level="INFO">Executing : Query  |  SELECT COUNT(DISTINCT [City]) AS count_cities FROM [Person].[Address]; </msg>
-<msg timestamp="20230403 20:18:51.630" level="INFO">@{result} = [ (575,) ]</msg>
-<status status="PASS" starttime="20230403 20:18:51.623" endtime="20230403 20:18:51.630"/>
+<msg timestamp="20230404 20:02:06.363" level="INFO">Executing : Query  |  SELECT COUNT(DISTINCT [City]) AS count_cities FROM [Person].[Address]; </msg>
+<msg timestamp="20230404 20:02:06.372" level="INFO">@{result} = [ (575,) ]</msg>
+<status status="PASS" starttime="20230404 20:02:06.363" endtime="20230404 20:02:06.372"/>
 </kw>
 <kw name="Should Not Be Empty" library="BuiltIn">
 <arg>${result}</arg>
 <doc>Verifies that the given item is not empty.</doc>
-<msg timestamp="20230403 20:18:51.630" level="INFO">Length is 1</msg>
-<status status="PASS" starttime="20230403 20:18:51.630" endtime="20230403 20:18:51.630"/>
+<msg timestamp="20230404 20:02:06.372" level="INFO">Length is 1</msg>
+<status status="PASS" starttime="20230404 20:02:06.372" endtime="20230404 20:02:06.372"/>
 </kw>
-<kw name="Should Contain" library="BuiltIn">
-<arg>${result}[0]${column_unique_cities_count}</arg>
+<kw name="Should Be Equal As Integers" library="BuiltIn">
+<arg>${result}[0][0]</arg>
 <arg>${query_person_address_unique_cities_result}</arg>
-<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
-<status status="PASS" starttime="20230403 20:18:51.631" endtime="20230403 20:18:51.631"/>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<msg timestamp="20230404 20:02:06.373" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20230404 20:02:06.373" endtime="20230404 20:02:06.373"/>
 </kw>
 <doc>| *Setup*:
 | 0.Connect To Database AdventureWorks2012 via pymsql
@@ -81,7 +87,7 @@ Set optional input `returnAsDict` to True to return values as a list of dictiona
 | 0.Result is not empty
 | 1.The total number unique cities in the [Person].[Address] table is the same as expected</doc>
 <tag>Table Person.Address</tag>
-<status status="PASS" starttime="20230403 20:18:51.622" endtime="20230403 20:18:51.631"/>
+<status status="PASS" starttime="20230404 20:02:06.362" endtime="20230404 20:02:06.373"/>
 </test>
 <test id="s1-t3" name="Verify the average length of the documents in [Production].[Document] table" line="42">
 <kw name="Query" library="DatabaseLibrary">
@@ -90,21 +96,24 @@ Set optional input `returnAsDict` to True to return values as a list of dictiona
 <doc>Uses the input `selectStatement` to query for the values that will be returned as a list of tuples. Set optional
 input `sansTran` to True to run command without an explicit transaction commit or rollback.
 Set optional input `returnAsDict` to True to return values as a list of dictionaries.</doc>
-<msg timestamp="20230403 20:18:51.633" level="INFO">Executing : Query  |  SELECT AVG(LEN([Document])) AS avg_lenght FROM [Production].[Document]; </msg>
-<msg timestamp="20230403 20:18:51.633" level="INFO">@{result} = [ (31971,) ]</msg>
-<status status="PASS" starttime="20230403 20:18:51.633" endtime="20230403 20:18:51.633"/>
+<msg timestamp="20230404 20:02:06.374" level="INFO">Executing : Query  |  SELECT AVG(LEN([Document])) AS avg_lenght FROM [Production].[Document]; </msg>
+<msg timestamp="20230404 20:02:06.570" level="INFO">@{result} = [ (31971,) ]</msg>
+<status status="PASS" starttime="20230404 20:02:06.374" endtime="20230404 20:02:06.570"/>
 </kw>
 <kw name="Should Not Be Empty" library="BuiltIn">
 <arg>${result}</arg>
 <doc>Verifies that the given item is not empty.</doc>
-<msg timestamp="20230403 20:18:51.634" level="INFO">Length is 1</msg>
-<status status="PASS" starttime="20230403 20:18:51.634" endtime="20230403 20:18:51.634"/>
+<msg timestamp="20230404 20:02:06.571" level="INFO">Length is 1</msg>
+<status status="PASS" starttime="20230404 20:02:06.570" endtime="20230404 20:02:06.571"/>
 </kw>
-<kw name="Should Contain" library="BuiltIn">
-<arg>${result}[0]${column_query_average_lenght_of_doc}</arg>
+<kw name="Should Be Equal As Integers" library="BuiltIn">
+<arg>${result}[0][0]</arg>
 <arg>${query_average_lenght_of_doc_result}</arg>
-<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
-<status status="PASS" starttime="20230403 20:18:51.634" endtime="20230403 20:18:51.634"/>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<msg timestamp="20230404 20:02:06.571" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20230404 20:02:06.571" endtime="20230404 20:02:06.571"/>
 </kw>
 <doc>| *Setup*:
 | 0.Connect To Database AdventureWorks2012 via pymsql
@@ -116,7 +125,7 @@ Set optional input `returnAsDict` to True to return values as a list of dictiona
 | 0.Result is not empty
 | 1. Average value of length of [Document] in [Production].[Document] table is the same as expected</doc>
 <tag>Table Production.Document</tag>
-<status status="PASS" starttime="20230403 20:18:51.632" endtime="20230403 20:18:51.634"/>
+<status status="PASS" starttime="20230404 20:02:06.374" endtime="20230404 20:02:06.572"/>
 </test>
 <test id="s1-t4" name="Verify the possible values of [Status] attribute in [Production].[Document] table" line="58">
 <kw name="Query" library="DatabaseLibrary">
@@ -125,21 +134,24 @@ Set optional input `returnAsDict` to True to return values as a list of dictiona
 <doc>Uses the input `selectStatement` to query for the values that will be returned as a list of tuples. Set optional
 input `sansTran` to True to run command without an explicit transaction commit or rollback.
 Set optional input `returnAsDict` to True to return values as a list of dictionaries.</doc>
-<msg timestamp="20230403 20:18:51.635" level="INFO">Executing : Query  |  SELECT COUNT ([Status]) AS count_values FROM [Production].[Document] WHERE [STATUS] &lt;1 OR [STATUS]&gt;3; </msg>
-<msg timestamp="20230403 20:18:51.635" level="INFO">@{result} = [ (0,) ]</msg>
-<status status="PASS" starttime="20230403 20:18:51.635" endtime="20230403 20:18:51.635"/>
+<msg timestamp="20230404 20:02:06.574" level="INFO">Executing : Query  |  SELECT COUNT ([Status]) AS count_values FROM [Production].[Document] WHERE [STATUS] &lt;1 OR [STATUS]&gt;3; </msg>
+<msg timestamp="20230404 20:02:06.575" level="INFO">@{result} = [ (0,) ]</msg>
+<status status="PASS" starttime="20230404 20:02:06.574" endtime="20230404 20:02:06.575"/>
 </kw>
 <kw name="Should Not Be Empty" library="BuiltIn">
 <arg>${result}</arg>
 <doc>Verifies that the given item is not empty.</doc>
-<msg timestamp="20230403 20:18:51.636" level="INFO">Length is 1</msg>
-<status status="PASS" starttime="20230403 20:18:51.636" endtime="20230403 20:18:51.636"/>
+<msg timestamp="20230404 20:02:06.576" level="INFO">Length is 1</msg>
+<status status="PASS" starttime="20230404 20:02:06.576" endtime="20230404 20:02:06.576"/>
 </kw>
-<kw name="Should Contain" library="BuiltIn">
-<arg>${result}[0]${column_possible_status}</arg>
+<kw name="Should Be Equal As Integers" library="BuiltIn">
+<arg>${result}[0][0]</arg>
 <arg>${query_possible_status_result}</arg>
-<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
-<status status="PASS" starttime="20230403 20:18:51.636" endtime="20230403 20:18:51.636"/>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<msg timestamp="20230404 20:02:06.576" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20230404 20:02:06.576" endtime="20230404 20:02:06.576"/>
 </kw>
 <doc>| *Setup*:
 | 0.Connect To Database AdventureWorks2012 via pymsql
@@ -151,65 +163,103 @@ Set optional input `returnAsDict` to True to return values as a list of dictiona
 | 0.Result is not empty
 | 1. Count of rows with incorrect [Status] is the same as expected: 0</doc>
 <tag>Table Production.Document</tag>
-<status status="PASS" starttime="20230403 20:18:51.634" endtime="20230403 20:18:51.636"/>
+<status status="PASS" starttime="20230404 20:02:06.573" endtime="20230404 20:02:06.576"/>
 </test>
-<test id="s1-t5" name="Verify the maximum value of the [ModifiedDate] column in [Production].[UnitMeasure] table" line="74">
-<kw name="Convert Date" library="DateTime">
-<var>${datetime}</var>
-<arg>2014-06-11 10:07:42.123</arg>
-<arg>datetime</arg>
-<doc>Converts between supported `date formats`.</doc>
-<msg timestamp="20230403 20:18:51.639" level="INFO">${datetime} = 2014-06-11 10:07:42.123000</msg>
-<status status="PASS" starttime="20230403 20:18:51.638" endtime="20230403 20:18:51.639"/>
-</kw>
+<test id="s1-t5" name="Verify the maximum value of the [ModifiedDate] column in [Production].[UnitMeasure] table" line="75">
 <kw name="Query" library="DatabaseLibrary">
 <var>@{result}</var>
 <arg>${query_max_modified_date}</arg>
 <doc>Uses the input `selectStatement` to query for the values that will be returned as a list of tuples. Set optional
 input `sansTran` to True to run command without an explicit transaction commit or rollback.
 Set optional input `returnAsDict` to True to return values as a list of dictionaries.</doc>
-<msg timestamp="20230403 20:18:51.639" level="INFO">Executing : Query  |  SELECT MAX([ModifiedDate]) as max_date FROM [Production].[UnitMeasure]; </msg>
-<msg timestamp="20230403 20:18:51.640" level="INFO">@{result} = [ (datetime.datetime(2008, 4, 30, 0, 0),) ]</msg>
-<status status="PASS" starttime="20230403 20:18:51.639" endtime="20230403 20:18:51.640"/>
+<msg timestamp="20230404 20:02:06.577" level="INFO">Executing : Query  |  SELECT MAX([ModifiedDate]) as max_date FROM [Production].[UnitMeasure]; </msg>
+<msg timestamp="20230404 20:02:06.579" level="INFO">@{result} = [ (datetime.datetime(2008, 4, 30, 0, 0),) ]</msg>
+<status status="PASS" starttime="20230404 20:02:06.577" endtime="20230404 20:02:06.579"/>
 </kw>
-<kw name="Log To Console" library="BuiltIn">
-<arg>Type</arg>
-<arg>${datetime}</arg>
-<doc>Logs the given message to the console.</doc>
-<msg timestamp="20230403 20:18:51.640" level="FAIL">AttributeError: 'datetime.datetime' object has no attribute 'lower'</msg>
-<status status="FAIL" starttime="20230403 20:18:51.640" endtime="20230403 20:18:51.640"/>
+<kw name="Should Not Be Empty" library="BuiltIn">
+<arg>${result}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<msg timestamp="20230404 20:02:06.579" level="INFO">Length is 1</msg>
+<status status="PASS" starttime="20230404 20:02:06.579" endtime="20230404 20:02:06.579"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${result}[0][0]</arg>
+<arg>${query_max_modified_date_result}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20230404 20:02:06.579" level="INFO">Argument types are:
+&lt;class 'datetime.datetime'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20230404 20:02:06.579" endtime="20230404 20:02:06.579"/>
 </kw>
 <doc>| *Setup*:
 | 0.Connect To Database AdventureWorks2012 via pymsql
 |
 | *Test Steps*
-| 0.The maximum value of the [ModifiedDate] column in [Production].[UnitMeasure] table.
+| 0.Query to calculate the maximum value of the [ModifiedDate] column in [Production].[UnitMeasure] table.
 |
 | *Expected result:*
 | 0.Result is not empty
 | 1. The maximum value of the [ModifiedDate] column in [Production].[UnitMeasure] table is the same as expected.</doc>
 <tag>Table [Production].[UnitMeasure]</tag>
-<status status="FAIL" starttime="20230403 20:18:51.637" endtime="20230403 20:18:51.640">AttributeError: 'datetime.datetime' object has no attribute 'lower'</status>
+<status status="PASS" starttime="20230404 20:02:06.577" endtime="20230404 20:02:06.579"/>
+</test>
+<test id="s1-t6" name="Verify the numbers of rows in [Production].[UnitMeasure] table with [UnitMeasureCode] with only one symbol" line="92">
+<kw name="Query" library="DatabaseLibrary">
+<var>@{result}</var>
+<arg>${query_numbers_with_one_symbol}</arg>
+<doc>Uses the input `selectStatement` to query for the values that will be returned as a list of tuples. Set optional
+input `sansTran` to True to run command without an explicit transaction commit or rollback.
+Set optional input `returnAsDict` to True to return values as a list of dictionaries.</doc>
+<msg timestamp="20230404 20:02:06.580" level="INFO">Executing : Query  |  SELECT COUNT(*) AS count_values FROM [Production].[UnitMeasure] WHERE LEN([UnitMeasureCode])=1; </msg>
+<msg timestamp="20230404 20:02:06.582" level="INFO">@{result} = [ (4,) ]</msg>
+<status status="PASS" starttime="20230404 20:02:06.580" endtime="20230404 20:02:06.582"/>
+</kw>
+<kw name="Should Not Be Empty" library="BuiltIn">
+<arg>${result}</arg>
+<doc>Verifies that the given item is not empty.</doc>
+<msg timestamp="20230404 20:02:06.582" level="INFO">Length is 1</msg>
+<status status="PASS" starttime="20230404 20:02:06.582" endtime="20230404 20:02:06.582"/>
+</kw>
+<kw name="Should Be Equal As Strings" library="BuiltIn">
+<arg>${result}[0][0]</arg>
+<arg>${query_numbers_with_one_symbol_result}</arg>
+<doc>Fails if objects are unequal after converting them to strings.</doc>
+<msg timestamp="20230404 20:02:06.582" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<status status="PASS" starttime="20230404 20:02:06.582" endtime="20230404 20:02:06.582"/>
+</kw>
+<doc>| *Setup*:
+| 0.Connect To Database AdventureWorks2012 via pymsql
+|
+| *Test Steps*
+| 0.Query to calculate numbers of rows in [Production].[UnitMeasure] table with [UnitMeasureCode] with only one symbol.
+|
+| *Expected result:*
+| 0.Result is not empty
+| 1.Numbers of rows in [Production].[UnitMeasure] table with [UnitMeasureCode] with only one symbol is the same as expected.</doc>
+<tag>Table [Production].[UnitMeasure]</tag>
+<status status="PASS" starttime="20230404 20:02:06.580" endtime="20230404 20:02:06.583"/>
 </test>
 <kw name="Disconnect From Database" library="DatabaseLibrary" type="TEARDOWN">
 <doc>Disconnects from the database.</doc>
-<msg timestamp="20230403 20:18:51.641" level="INFO">Executing : Disconnect From Database</msg>
-<status status="PASS" starttime="20230403 20:18:51.641" endtime="20230403 20:18:51.641"/>
+<msg timestamp="20230404 20:02:06.583" level="INFO">Executing : Disconnect From Database</msg>
+<status status="PASS" starttime="20230404 20:02:06.583" endtime="20230404 20:02:06.583"/>
 </kw>
 <doc>Contains Test Cases from file TestCasesRF.xlsx</doc>
-<status status="FAIL" starttime="20230403 20:18:51.558" endtime="20230403 20:18:51.641"/>
+<status status="PASS" starttime="20230404 20:02:06.296" endtime="20230404 20:02:06.583"/>
 </suite>
 <statistics>
 <total>
-<stat pass="4" fail="1" skip="0">All Tests</stat>
+<stat pass="6" fail="0" skip="0">All Tests</stat>
 </total>
 <tag>
-<stat pass="0" fail="1" skip="0">Table [Production].[UnitMeasure]</stat>
+<stat pass="2" fail="0" skip="0">Table [Production].[UnitMeasure]</stat>
 <stat pass="2" fail="0" skip="0">Table Person.Address</stat>
 <stat pass="2" fail="0" skip="0">Table Production.Document</stat>
 </tag>
 <suite>
-<stat pass="4" fail="1" skip="0" id="s1" name="Tests">Tests</stat>
+<stat pass="6" fail="0" skip="0" id="s1" name="Tests">Tests</stat>
 </suite>
 </statistics>
 <errors>

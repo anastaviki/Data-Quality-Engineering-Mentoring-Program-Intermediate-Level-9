@@ -1,8 +1,9 @@
 *** Settings ***
 Documentation    Robot resources and variables for all tests
 
-Library    DatabaseLibrary
 Library    DateTime
+Library    DatabaseLibrary
+
 
 Resource    test_data.robot
 
