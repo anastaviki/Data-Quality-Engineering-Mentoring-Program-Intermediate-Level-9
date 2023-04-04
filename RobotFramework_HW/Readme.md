@@ -7,3 +7,4 @@ This folder contains Robot Framework project with automated test cases for Adven
 ## How to use the project
 1. Go to directory RF_Tests/tests
 2. Run test cases you can use _robot tests.robot_ command
+3. Check report.html, output.xml and log.html files in directory RF_Tests/tests
