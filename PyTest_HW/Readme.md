@@ -3,7 +3,7 @@
 This folder contains PyTest project with automated test cases for AdventureWorks2012 database from TestCasesPyTest.xlsx file
 ## Requirements
 1. Python 3
-2. PyTest. You can use _pip install robotframework_ to install it 
+2. PyTest. You can use _pip install pytest_ to install it 
 3. pyodbc interface. You can use _pip install pyodbc_ to install it
 4. pytest-html plugin You can use _pip install pytest-html_ to install it
 5. loggin library You can use _pip install logging_ to install it
