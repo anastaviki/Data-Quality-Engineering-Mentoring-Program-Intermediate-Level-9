@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="eea5c393-bd8c-4ede-8440-32e7c61f8e63" name="Changes" comment="" />
+    <list default="true" id="eea5c393-bd8c-4ede-8440-32e7c61f8e63" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../PyTest_HW/PyTest/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../PyTest_HW/PyTest/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RF_Tests/tests/log.html" beforeDir="false" afterPath="$PROJECT_DIR$/RF_Tests/tests/log.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RF_Tests/tests/output.xml" beforeDir="false" afterPath="$PROJECT_DIR$/RF_Tests/tests/output.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RF_Tests/tests/report.html" beforeDir="false" afterPath="$PROJECT_DIR$/RF_Tests/tests/report.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -9,6 +14,9 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectId" id="2NuKOfaujG9r7cTtFz6pZmqt28s" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -19,7 +27,8 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true"
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "C:/Users/Anastasiya_Viktarovi/Documents/GitHub/Data-Quality-Engineering-Mentoring-Program-Intermediate-Level-9/PyTest_HW/PyTest"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />

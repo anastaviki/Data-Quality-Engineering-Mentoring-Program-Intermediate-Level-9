@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 6.0.2 (Python 3.11.0 on win32)" generated="20230404 20:34:08.301" rpa="false" schemaversion="3">
+<robot generator="Robot 6.0.2 (Python 3.11.0 on win32)" generated="20230417 21:57:14.373" rpa="false" schemaversion="3">
 <suite id="s1" name="Tests" source="C:\Users\Anastasiya_Viktarovi\Documents\GitHub\Data-Quality-Engineering-Mentoring-Program-Intermediate-Level-9\RobotFramework_HW\RF_Tests\tests\tests.robot">
 <kw name="Connect To Database" library="DatabaseLibrary" type="SETUP">
 <arg>pymssql</arg>
@@ -10,35 +10,11 @@
 <arg>${DBPort}</arg>
 <doc>Loads the DB API 2.0 module given `dbapiModuleName` then uses it to
 connect to the database using `dbName`, `dbUsername`, and `dbPassword`.</doc>
-<msg timestamp="20230404 20:34:08.331" level="INFO">Connecting using : pymssql.connect(database=AdventureWorks2012, user=test_user, password=test_user, host=EPPLWARW01DC\SQLEXPRESS, port=1433) </msg>
-<status status="PASS" starttime="20230404 20:34:08.324" endtime="20230404 20:34:08.359"/>
+<msg timestamp="20230417 21:57:14.419" level="INFO">Connecting using : pymssql.connect(database=AdventureWorks2012, user=test_user, password=test_user, host=EPPLWARW01DC\SQLEXPRESS, port=1433) </msg>
+<msg timestamp="20230417 21:57:14.447" level="FAIL">OperationalError: (20009, b'DB-Lib error message 20009, severity 9:\nUnable to connect: Adaptive Server is unavailable or does not exist (EPPLWARW01DC)\nDB-Lib error message 20009, severity 9:\nUnable to connect: Adaptive Server is unavailable or does not exist (EPPLWARW01DC)\n')</msg>
+<status status="FAIL" starttime="20230417 21:57:14.397" endtime="20230417 21:57:14.448"/>
 </kw>
 <test id="s1-t1" name="Verify the count of records in [Person].[Address] table" line="10">
-<kw name="Query" library="DatabaseLibrary">
-<var>@{result}</var>
-<arg>${query_person_address_count}</arg>
-<doc>Uses the input `selectStatement` to query for the values that will be returned as a list of tuples. Set optional
-input `sansTran` to True to run command without an explicit transaction commit or rollback.
-Set optional input `returnAsDict` to True to return values as a list of dictionaries.</doc>
-<msg timestamp="20230404 20:34:08.361" level="INFO">Executing : Query  |  SELECT COUNT(*) AS count_rows FROM [Person].[Address]; </msg>
-<msg timestamp="20230404 20:34:08.363" level="INFO">@{result} = [ (19614,) ]</msg>
-<status status="PASS" starttime="20230404 20:34:08.360" endtime="20230404 20:34:08.363"/>
-</kw>
-<kw name="Should Not Be Empty" library="BuiltIn">
-<arg>${result}</arg>
-<doc>Verifies that the given item is not empty.</doc>
-<msg timestamp="20230404 20:34:08.364" level="INFO">Length is 1</msg>
-<status status="PASS" starttime="20230404 20:34:08.364" endtime="20230404 20:34:08.364"/>
-</kw>
-<kw name="Should Be Equal As Integers" library="BuiltIn">
-<arg>${result}[0][0]</arg>
-<arg>${query_person_address_count_result}</arg>
-<doc>Fails if objects are unequal after converting them to integers.</doc>
-<msg timestamp="20230404 20:34:08.365" level="INFO">Argument types are:
-&lt;class 'int'&gt;
-&lt;class 'str'&gt;</msg>
-<status status="PASS" starttime="20230404 20:34:08.364" endtime="20230404 20:34:08.365"/>
-</kw>
 <doc>| *Setup*:
 | 0.Connect To Database AdventureWorks2012 via pymsql
 |
@@ -49,34 +25,10 @@ Set optional input `returnAsDict` to True to return values as a list of dictiona
 | 0.Result is not empty
 | 1.The value with the total number of records in the [Person].[Address] table is the same as expected</doc>
 <tag>Table Person.Address</tag>
-<status status="PASS" starttime="20230404 20:34:08.360" endtime="20230404 20:34:08.365"/>
+<status status="FAIL" starttime="20230417 21:57:14.448" endtime="20230417 21:57:14.449">Parent suite setup failed:
+OperationalError: (20009, b'DB-Lib error message 20009, severity 9:\nUnable to connect: Adaptive Server is unavailable or does not exist (EPPLWARW01DC)\nDB-Lib error message 20009, severity 9:\nUnable to connect: Adaptive Server is unavailable or does not exist (EPPLWARW01DC)\n')</status>
 </test>
 <test id="s1-t2" name="Verify the number of unique cities in [Person].[Address] table" line="26">
-<kw name="Query" library="DatabaseLibrary">
-<var>@{result}</var>
-<arg>${query_person_address_unique_cities}</arg>
-<doc>Uses the input `selectStatement` to query for the values that will be returned as a list of tuples. Set optional
-input `sansTran` to True to run command without an explicit transaction commit or rollback.
-Set optional input `returnAsDict` to True to return values as a list of dictionaries.</doc>
-<msg timestamp="20230404 20:34:08.368" level="INFO">Executing : Query  |  SELECT COUNT(DISTINCT [City]) AS count_cities FROM [Person].[Address]; </msg>
-<msg timestamp="20230404 20:34:08.376" level="INFO">@{result} = [ (575,) ]</msg>
-<status status="PASS" starttime="20230404 20:34:08.367" endtime="20230404 20:34:08.376"/>
-</kw>
-<kw name="Should Not Be Empty" library="BuiltIn">
-<arg>${result}</arg>
-<doc>Verifies that the given item is not empty.</doc>
-<msg timestamp="20230404 20:34:08.377" level="INFO">Length is 1</msg>
-<status status="PASS" starttime="20230404 20:34:08.377" endtime="20230404 20:34:08.377"/>
-</kw>
-<kw name="Should Be Equal As Integers" library="BuiltIn">
-<arg>${result}[0][0]</arg>
-<arg>${query_person_address_unique_cities_result}</arg>
-<doc>Fails if objects are unequal after converting them to integers.</doc>
-<msg timestamp="20230404 20:34:08.378" level="INFO">Argument types are:
-&lt;class 'int'&gt;
-&lt;class 'str'&gt;</msg>
-<status status="PASS" starttime="20230404 20:34:08.377" endtime="20230404 20:34:08.378"/>
-</kw>
 <doc>| *Setup*:
 | 0.Connect To Database AdventureWorks2012 via pymsql
 |
@@ -87,34 +39,10 @@ Set optional input `returnAsDict` to True to return values as a list of dictiona
 | 0.Result is not empty
 | 1.The total number unique cities in the [Person].[Address] table is the same as expected</doc>
 <tag>Table Person.Address</tag>
-<status status="PASS" starttime="20230404 20:34:08.367" endtime="20230404 20:34:08.378"/>
+<status status="FAIL" starttime="20230417 21:57:14.450" endtime="20230417 21:57:14.450">Parent suite setup failed:
+OperationalError: (20009, b'DB-Lib error message 20009, severity 9:\nUnable to connect: Adaptive Server is unavailable or does not exist (EPPLWARW01DC)\nDB-Lib error message 20009, severity 9:\nUnable to connect: Adaptive Server is unavailable or does not exist (EPPLWARW01DC)\n')</status>
 </test>
 <test id="s1-t3" name="Verify the average length of the documents in [Production].[Document] table" line="42">
-<kw name="Query" library="DatabaseLibrary">
-<var>@{result}</var>
-<arg>${query_average_lenght_of_doc}</arg>
-<doc>Uses the input `selectStatement` to query for the values that will be returned as a list of tuples. Set optional
-input `sansTran` to True to run command without an explicit transaction commit or rollback.
-Set optional input `returnAsDict` to True to return values as a list of dictionaries.</doc>
-<msg timestamp="20230404 20:34:08.380" level="INFO">Executing : Query  |  SELECT AVG(LEN([Document])) AS avg_lenght FROM [Production].[Document]; </msg>
-<msg timestamp="20230404 20:34:08.622" level="INFO">@{result} = [ (31971,) ]</msg>
-<status status="PASS" starttime="20230404 20:34:08.380" endtime="20230404 20:34:08.622"/>
-</kw>
-<kw name="Should Not Be Empty" library="BuiltIn">
-<arg>${result}</arg>
-<doc>Verifies that the given item is not empty.</doc>
-<msg timestamp="20230404 20:34:08.623" level="INFO">Length is 1</msg>
-<status status="PASS" starttime="20230404 20:34:08.623" endtime="20230404 20:34:08.623"/>
-</kw>
-<kw name="Should Be Equal As Integers" library="BuiltIn">
-<arg>${result}[0][0]</arg>
-<arg>${query_average_lenght_of_doc_result}</arg>
-<doc>Fails if objects are unequal after converting them to integers.</doc>
-<msg timestamp="20230404 20:34:08.625" level="INFO">Argument types are:
-&lt;class 'int'&gt;
-&lt;class 'str'&gt;</msg>
-<status status="PASS" starttime="20230404 20:34:08.624" endtime="20230404 20:34:08.625"/>
-</kw>
 <doc>| *Setup*:
 | 0.Connect To Database AdventureWorks2012 via pymsql
 |
@@ -125,34 +53,10 @@ Set optional input `returnAsDict` to True to return values as a list of dictiona
 | 0.Result is not empty
 | 1. Average value of length of [Document] in [Production].[Document] table is the same as expected</doc>
 <tag>Table Production.Document</tag>
-<status status="PASS" starttime="20230404 20:34:08.379" endtime="20230404 20:34:08.626"/>
+<status status="FAIL" starttime="20230417 21:57:14.451" endtime="20230417 21:57:14.451">Parent suite setup failed:
+OperationalError: (20009, b'DB-Lib error message 20009, severity 9:\nUnable to connect: Adaptive Server is unavailable or does not exist (EPPLWARW01DC)\nDB-Lib error message 20009, severity 9:\nUnable to connect: Adaptive Server is unavailable or does not exist (EPPLWARW01DC)\n')</status>
 </test>
 <test id="s1-t4" name="Verify the possible values of [Status] attribute in [Production].[Document] table" line="58">
-<kw name="Query" library="DatabaseLibrary">
-<var>@{result}</var>
-<arg>${query_possible_status}</arg>
-<doc>Uses the input `selectStatement` to query for the values that will be returned as a list of tuples. Set optional
-input `sansTran` to True to run command without an explicit transaction commit or rollback.
-Set optional input `returnAsDict` to True to return values as a list of dictionaries.</doc>
-<msg timestamp="20230404 20:34:08.629" level="INFO">Executing : Query  |  SELECT COUNT ([Status]) AS count_values FROM [Production].[Document] WHERE [STATUS] &lt;1 OR [STATUS]&gt;3; </msg>
-<msg timestamp="20230404 20:34:08.631" level="INFO">@{result} = [ (0,) ]</msg>
-<status status="PASS" starttime="20230404 20:34:08.629" endtime="20230404 20:34:08.631"/>
-</kw>
-<kw name="Should Not Be Empty" library="BuiltIn">
-<arg>${result}</arg>
-<doc>Verifies that the given item is not empty.</doc>
-<msg timestamp="20230404 20:34:08.631" level="INFO">Length is 1</msg>
-<status status="PASS" starttime="20230404 20:34:08.631" endtime="20230404 20:34:08.631"/>
-</kw>
-<kw name="Should Be Equal As Integers" library="BuiltIn">
-<arg>${result}[0][0]</arg>
-<arg>${query_possible_status_result}</arg>
-<doc>Fails if objects are unequal after converting them to integers.</doc>
-<msg timestamp="20230404 20:34:08.632" level="INFO">Argument types are:
-&lt;class 'int'&gt;
-&lt;class 'str'&gt;</msg>
-<status status="PASS" starttime="20230404 20:34:08.632" endtime="20230404 20:34:08.632"/>
-</kw>
 <doc>| *Setup*:
 | 0.Connect To Database AdventureWorks2012 via pymsql
 |
@@ -163,34 +67,10 @@ Set optional input `returnAsDict` to True to return values as a list of dictiona
 | 0.Result is not empty
 | 1. Count of rows with incorrect [Status] is the same as expected: 0</doc>
 <tag>Table Production.Document</tag>
-<status status="PASS" starttime="20230404 20:34:08.628" endtime="20230404 20:34:08.632"/>
+<status status="FAIL" starttime="20230417 21:57:14.452" endtime="20230417 21:57:14.452">Parent suite setup failed:
+OperationalError: (20009, b'DB-Lib error message 20009, severity 9:\nUnable to connect: Adaptive Server is unavailable or does not exist (EPPLWARW01DC)\nDB-Lib error message 20009, severity 9:\nUnable to connect: Adaptive Server is unavailable or does not exist (EPPLWARW01DC)\n')</status>
 </test>
 <test id="s1-t5" name="Verify the maximum value of the [ModifiedDate] column in [Production].[UnitMeasure] table" line="74">
-<kw name="Query" library="DatabaseLibrary">
-<var>@{result}</var>
-<arg>${query_max_modified_date}</arg>
-<doc>Uses the input `selectStatement` to query for the values that will be returned as a list of tuples. Set optional
-input `sansTran` to True to run command without an explicit transaction commit or rollback.
-Set optional input `returnAsDict` to True to return values as a list of dictionaries.</doc>
-<msg timestamp="20230404 20:34:08.634" level="INFO">Executing : Query  |  SELECT MAX([ModifiedDate]) as max_date FROM [Production].[UnitMeasure]; </msg>
-<msg timestamp="20230404 20:34:08.636" level="INFO">@{result} = [ (datetime.datetime(2008, 4, 30, 0, 0),) ]</msg>
-<status status="PASS" starttime="20230404 20:34:08.634" endtime="20230404 20:34:08.636"/>
-</kw>
-<kw name="Should Not Be Empty" library="BuiltIn">
-<arg>${result}</arg>
-<doc>Verifies that the given item is not empty.</doc>
-<msg timestamp="20230404 20:34:08.637" level="INFO">Length is 1</msg>
-<status status="PASS" starttime="20230404 20:34:08.637" endtime="20230404 20:34:08.637"/>
-</kw>
-<kw name="Should Be Equal As Strings" library="BuiltIn">
-<arg>${result}[0][0]</arg>
-<arg>${query_max_modified_date_result}</arg>
-<doc>Fails if objects are unequal after converting them to strings.</doc>
-<msg timestamp="20230404 20:34:08.637" level="INFO">Argument types are:
-&lt;class 'datetime.datetime'&gt;
-&lt;class 'str'&gt;</msg>
-<status status="PASS" starttime="20230404 20:34:08.637" endtime="20230404 20:34:08.637"/>
-</kw>
 <doc>| *Setup*:
 | 0.Connect To Database AdventureWorks2012 via pymsql
 |
@@ -201,34 +81,10 @@ Set optional input `returnAsDict` to True to return values as a list of dictiona
 | 0.Result is not empty
 | 1. The maximum value of the [ModifiedDate] column in [Production].[UnitMeasure] table is the same as expected.</doc>
 <tag>Table Production.UnitMeasure</tag>
-<status status="PASS" starttime="20230404 20:34:08.634" endtime="20230404 20:34:08.638"/>
+<status status="FAIL" starttime="20230417 21:57:14.453" endtime="20230417 21:57:14.453">Parent suite setup failed:
+OperationalError: (20009, b'DB-Lib error message 20009, severity 9:\nUnable to connect: Adaptive Server is unavailable or does not exist (EPPLWARW01DC)\nDB-Lib error message 20009, severity 9:\nUnable to connect: Adaptive Server is unavailable or does not exist (EPPLWARW01DC)\n')</status>
 </test>
 <test id="s1-t6" name="Verify the numbers of rows in [Production].[UnitMeasure] table with [UnitMeasureCode] with only one symbol" line="90">
-<kw name="Query" library="DatabaseLibrary">
-<var>@{result}</var>
-<arg>${query_numbers_with_one_symbol}</arg>
-<doc>Uses the input `selectStatement` to query for the values that will be returned as a list of tuples. Set optional
-input `sansTran` to True to run command without an explicit transaction commit or rollback.
-Set optional input `returnAsDict` to True to return values as a list of dictionaries.</doc>
-<msg timestamp="20230404 20:34:08.640" level="INFO">Executing : Query  |  SELECT COUNT(*) AS count_values FROM [Production].[UnitMeasure] WHERE LEN([UnitMeasureCode])=1; </msg>
-<msg timestamp="20230404 20:34:08.641" level="INFO">@{result} = [ (4,) ]</msg>
-<status status="PASS" starttime="20230404 20:34:08.639" endtime="20230404 20:34:08.641"/>
-</kw>
-<kw name="Should Not Be Empty" library="BuiltIn">
-<arg>${result}</arg>
-<doc>Verifies that the given item is not empty.</doc>
-<msg timestamp="20230404 20:34:08.641" level="INFO">Length is 1</msg>
-<status status="PASS" starttime="20230404 20:34:08.641" endtime="20230404 20:34:08.641"/>
-</kw>
-<kw name="Should Be Equal As Strings" library="BuiltIn">
-<arg>${result}[0][0]</arg>
-<arg>${query_numbers_with_one_symbol_result}</arg>
-<doc>Fails if objects are unequal after converting them to strings.</doc>
-<msg timestamp="20230404 20:34:08.641" level="INFO">Argument types are:
-&lt;class 'int'&gt;
-&lt;class 'str'&gt;</msg>
-<status status="PASS" starttime="20230404 20:34:08.641" endtime="20230404 20:34:08.641"/>
-</kw>
 <doc>| *Setup*:
 | 0.Connect To Database AdventureWorks2012 via pymsql
 |
@@ -239,27 +95,33 @@ Set optional input `returnAsDict` to True to return values as a list of dictiona
 | 0.Result is not empty
 | 1.Numbers of rows in [Production].[UnitMeasure] table with [UnitMeasureCode] with only one symbol is the same as expected.</doc>
 <tag>Table Production.UnitMeasure</tag>
-<status status="PASS" starttime="20230404 20:34:08.639" endtime="20230404 20:34:08.642"/>
+<status status="FAIL" starttime="20230417 21:57:14.454" endtime="20230417 21:57:14.454">Parent suite setup failed:
+OperationalError: (20009, b'DB-Lib error message 20009, severity 9:\nUnable to connect: Adaptive Server is unavailable or does not exist (EPPLWARW01DC)\nDB-Lib error message 20009, severity 9:\nUnable to connect: Adaptive Server is unavailable or does not exist (EPPLWARW01DC)\n')</status>
 </test>
 <kw name="Disconnect From Database" library="DatabaseLibrary" type="TEARDOWN">
 <doc>Disconnects from the database.</doc>
-<msg timestamp="20230404 20:34:08.643" level="INFO">Executing : Disconnect From Database</msg>
-<status status="PASS" starttime="20230404 20:34:08.643" endtime="20230404 20:34:08.643"/>
+<msg timestamp="20230417 21:57:14.455" level="INFO">Executing : Disconnect From Database</msg>
+<msg timestamp="20230417 21:57:14.455" level="FAIL">AttributeError: 'NoneType' object has no attribute 'close'</msg>
+<status status="FAIL" starttime="20230417 21:57:14.455" endtime="20230417 21:57:14.456">AttributeError: 'NoneType' object has no attribute 'close'</status>
 </kw>
 <doc>Contains Test Cases from file TestCasesRF.xlsx</doc>
-<status status="PASS" starttime="20230404 20:34:08.303" endtime="20230404 20:34:08.643"/>
+<status status="FAIL" starttime="20230417 21:57:14.375" endtime="20230417 21:57:14.456">Suite setup failed:
+OperationalError: (20009, b'DB-Lib error message 20009, severity 9:\nUnable to connect: Adaptive Server is unavailable or does not exist (EPPLWARW01DC)\nDB-Lib error message 20009, severity 9:\nUnable to connect: Adaptive Server is unavailable or does not exist (EPPLWARW01DC)\n')
+
+Also suite teardown failed:
+AttributeError: 'NoneType' object has no attribute 'close'</status>
 </suite>
 <statistics>
 <total>
-<stat pass="6" fail="0" skip="0">All Tests</stat>
+<stat pass="0" fail="6" skip="0">All Tests</stat>
 </total>
 <tag>
-<stat pass="2" fail="0" skip="0">Table Person.Address</stat>
-<stat pass="2" fail="0" skip="0">Table Production.Document</stat>
-<stat pass="2" fail="0" skip="0">Table Production.UnitMeasure</stat>
+<stat pass="0" fail="2" skip="0">Table Person.Address</stat>
+<stat pass="0" fail="2" skip="0">Table Production.Document</stat>
+<stat pass="0" fail="2" skip="0">Table Production.UnitMeasure</stat>
 </tag>
 <suite>
-<stat pass="6" fail="0" skip="0" id="s1" name="Tests">Tests</stat>
+<stat pass="0" fail="6" skip="0" id="s1" name="Tests">Tests</stat>
 </suite>
 </statistics>
 <errors>

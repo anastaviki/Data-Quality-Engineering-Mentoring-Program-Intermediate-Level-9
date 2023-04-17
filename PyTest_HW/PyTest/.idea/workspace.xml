@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="01804986-98da-4be4-90c4-80e0093ce8a2" name="Changes" comment="" />
+    <list default="true" id="01804986-98da-4be4-90c4-80e0093ce8a2" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../../CI-CD HW/HW step by step.docx" beforeDir="false" afterPath="$PROJECT_DIR$/../../CI-CD HW/HW step by step.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../RobotFramework_HW/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../RobotFramework_HW/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../RobotFramework_HW/RF_Tests/tests/log.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../RobotFramework_HW/RF_Tests/tests/log.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../RobotFramework_HW/RF_Tests/tests/output.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../../RobotFramework_HW/RF_Tests/tests/output.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../RobotFramework_HW/RF_Tests/tests/report.html" beforeDir="false" afterPath="$PROJECT_DIR$/../../RobotFramework_HW/RF_Tests/tests/report.html" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -26,12 +33,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "last_opened_file_path": "C:/Users/Anastasiya_Viktarovi/Documents/GitHub/test/PyTest_HW/PyTest"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="test_cases" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="PyTest" />
