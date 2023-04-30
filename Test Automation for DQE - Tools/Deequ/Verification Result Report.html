@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<!-- saved from url=(0124)http://127.0.0.1:8888/files/work/verification_report.html?_xsrf=2%7C70c48b97%7C2e04e4bbc856ef794723eeebbd5347d6%7C1682335147 -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+  <title>Verification Result Report</title>
+  <style>
+    table, th, td {
+      border: 1px solid black;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 5px;
+      text-align: left;
+    }
+    th {
+      background-color: #ddd;
+    }
+    .success {
+      color: green;
+    }
+    .failure {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+  <h1>Verification Result Report</h1>
+  <p>47 checks were performed.</p>
+  <table>
+    <thead>
+      <tr>
+        <th>Check</th>
+        <th>Check Level</th>
+        <th>Check Status</th>
+        <th>Constraint</th>
+        <th>Constraint Status</th>
+        <th>Constraint Message</th>
+      </tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>Class check</td>
+          <td>Warning</td>
+          <td>Warning</td>
+          <td>CompletenessConstraint(Completeness(Class,None))</td>
+          <td class="failure">
+            Failure
+          </td>
+          <td>Value: 0.49007936507936506 does not meet the constraint requirement!</td>
+        </tr>
+      
+        <tr>
+          <td>Class check</td>
+          <td>Warning</td>
+          <td>Warning</td>
+          <td>ComplianceConstraint(Compliance(Class contained in L ,H ,M ,`Class` IS NULL OR `Class` IN ('L ','H ','M '),None))</td>
+          <td class="success">
+            Success
+          </td>
+          <td></td>
+        </tr>
+      
+        <tr>
+          <td>Color check</td>
+          <td>Warning</td>
+          <td>Warning</td>
+          <td>ComplianceConstraint(Compliance(Color contained in Black,Silver,Red,Yellow,Blue,Multi,Silver/Black,White,Grey,`Color` IS NULL OR `Color` IN ('Black','Silver','Red','Yellow','Blue','Multi','Silver/Black','White','Grey'),None))</td>
+          <td class="success">
+            Success
+          </td>
+          <td></td>
+        </tr>
+      
+        <tr>
+          <td>Color check</td>
+          <td>Warning</td>
+          <td>Warning</td>
+          <td>CompletenessConstraint(Completeness(Color,None))</td>
+          <td class="failure">
+            Failure
+          </td>
+          <td>Value: 0.5079365079365079 does not meet the constraint requirement!</td>
+        </tr>
+      
+        <tr>
+          <td>DaysToManufacture check</td>
+          <td>Warning</td>
+          <td>Success</td>
+          <td>MinimumConstraint(Minimum(DaysToManufacture,None))</td>
+          <td class="success">
+            Success
+          </td>
+          <td></td>
+        </tr>
+      
+        <tr>
+          <td>DaysToManufacture check</td>
+          <td>Warning</td>
+          <td>Success</td>
+          <td>ComplianceConstraint(Compliance(DaysToManufacture contained in 0,1,4,2,`DaysToManufacture` IS NULL OR `DaysToManufacture` IN ('0','1','4','2'),None))</td>
+          <td class="success">
+            Success
+          </td>
+          <td></td>
+        </tr>
+      
+        <tr>
+          <td>DaysToManufacture check</td>
+          <td>Warning</td>
+          <td>Success</td>
+          <td>CompletenessConstraint(Completeness(DaysToManufacture,None))</td>
+          <td class="success">
+            Success
+          </td>
+          <td></td>
+        </tr>
+      
+        <tr>
+          <td>FinishedGoodsFlag check</td>
+          <td>Warning</td>
+          <td>Success</td>
+          <td>CompletenessConstraint(Completeness(FinishedGoodsFlag,None))</td>
+          <td class="success">
+            Success
+          </td>
+          <td></td>
+        </tr>
+      
+        <tr>
+          <td>ListPrice check</td>
+          <td>Warning</td>
+          <td>Success</td>
+          <td>CompletenessConstraint(Completeness(ListPrice,None))</td>
+          <td class="success">
+            Success
+          </td>
+          <td></td>
+        </tr>
+      
+        <tr>
+          <td>ListPrice check</td>
+          <td>Warning</td>
+          <td>Success</td>
+          <td>MinimumConstraint(Minimum(ListPrice,None))</td>
+          <td class="success">
+            Success
+          </td>
+          <td></td>
+        </tr>
+      
+        <tr>
+          <td>MakeFlag check</td>
+          <td>Warning</td>
+          <td>Success</td>
+          <td>CompletenessConstraint(Completeness(MakeFlag,None))</td>
+          <td class="success">
+            Success
+          </td>
+          <td></td>
+        </tr>
+      
+        <tr>
+          <td>ModifiedDate check</td>
+          <td>Warning</td>
+          <td>Success</td>
+          <td>CompletenessConstraint(Completeness(ModifiedDate,None))</td>
+          <td class="success">
+            Success
+          </td>
+          <td></td>
+        </tr>
+      
+        <tr>
+          <td>Name check</td>
+          <td>Warning</td>
+          <td>Success</td>
+          <td>CompletenessConstraint(Completeness(Name,None))</td>
+          <td class="success">
+            Success
+          </td>
+          <td></td>
+        </tr>
+      
+        <tr>
+          <td>Name check</td>
+          <td>Warning</td>
+          <td>Success</td>
+          <td>UniquenessConstraint(Uniqueness(List(Name),None))</td>
+          <td class="success">
+            Success
+          </td>
+          <td></td>
+        </tr>
+      
+        <tr>
+          <td>ProductID check</td>
+          <td>Warning</td>
+          <td>Success</td>
+          <td>UniquenessConstraint(Uniqueness(List(ProductID),None))</td>
+          <td class="success">
+            Success
+          </td>
+          <td></td>
+        </tr>
+      
+        <tr>
+          <td>ProductID check</td>
+          <td>Warning</td>
+          <td>Success</td>
+          <td>MinimumConstraint(Minimum(ProductID,None))</td>
+          <td class="success">
+            Success
+          </td>
+          <td></td>
+        </tr>
+      
+        <tr>
+          <td>ProductID check</td>
+          <td>Warning</td>
+          <td>Success</td>
+          <td>CompletenessConstraint(Completeness(ProductID,None))</td>
+          <td class="success">
+            Success
+          </td>
+          <td></td>
+        </tr>
+      
+        <tr>
+          <td>ProductLine check</td>
+          <td>Warning</td>
+          <td>Warning</td>
+          <td>CompletenessConstraint(Completeness(ProductLine,None))</td>
+          <td class="failure">
+            Failure
+          </td>
+          <td>Value: 0.5515873015873016 does not meet the constraint requirement!</td>
+        </tr>
+      
+        <tr>
+          <td>ProductLine check</td>
+          <td>Warning</td>
+          <td>Warning</td>
+          <td>ComplianceConstraint(Compliance(ProductLine contained in R ,M ,T ,S ,`ProductLine` IS NULL OR `ProductLine` IN ('R ','M ','T ','S '),None))</td>
+          <td class="success">
+            Success
+          </td>
+          <td></td>
+        </tr>
+      
+        <tr>
+          <td>ProductModelID check</td>
+          <td>Warning</td>
+          <td>Warning</td>
+          <td>MinimumConstraint(Minimum(ProductModelID,None))</td>
+          <td class="success">
+            Success
+          </td>
+          <td></td>
+        </tr>
+      
+        <tr>
+          <td>ProductModelID check</td>
+          <td>Warning</td>
+          <td>Warning</td>
+          <td>CompletenessConstraint(Completeness(ProductModelID,None))</td>
+          <td class="failure">
+            Failure
+          </td>
+          <td>Value: 0.5853174603174603 does not meet the constraint requirement!</td>
+        </tr>
+      
+        <tr>
+          <td>ProductNumber check</td>
+          <td>Warning</td>
+          <td>Success</td>
+          <td>CompletenessConstraint(Completeness(ProductNumber,None))</td>
+          <td class="success">
+            Success
+          </td>
+          <td></td>
+        </tr>
+      
+        <tr>
+          <td>ProductNumber check</td>
+          <td>Warning</td>
+          <td>Success</td>
+          <td>UniquenessConstraint(Uniqueness(List(ProductNumber),None))</td>
+          <td class="success">
+            Success
+          </td>
+          <td></td>
+        </tr>
+      
+        <tr>
+          <td>ProductSubcategoryID check</td>
+          <td>Warning</td>
+          <td>Warning</td>
+          <td>CompletenessConstraint(Completeness(ProductSubcategoryID,None))</td>
+          <td class="failure">
+            Failure
+          </td>
+          <td>Value: 0.5853174603174603 does not meet the constraint requirement!</td>
+        </tr>
+      
+        <tr>
+          <td>ProductSubcategoryID check</td>
+          <td>Warning</td>
+          <td>Warning</td>
+          <td>MinimumConstraint(Minimum(ProductSubcategoryID,None))</td>
+          <td class="success">
+            Success
+          </td>
+          <td></td>
+        </tr>
+      
+        <tr>
+          <td>ProductSubcategoryID check</td>
+          <td>Warning</td>
+          <td>Warning</td>
+          <td>ComplianceConstraint(Compliance(ProductSubcategoryID contained in 2,14,1,12,3,16,17,37,15,21,4,13,22,20,`ProductSubcategoryID` IS NULL OR `ProductSubcategoryID` IN ('2','14','1','12','3','16','17','37','15','21','4','13','22','20'),None))</td>
+          <td class="failure">
+            Failure
+          </td>
+          <td>Value: 0.9027777777777778 does not meet the constraint requirement!</td>
+        </tr>
+      
+        <tr>
+          <td>ReorderPoint check</td>
+          <td>Warning</td>
+          <td>Success</td>
+          <td>ComplianceConstraint(Compliance(ReorderPoint contained in 375,750,75,3,600,45,`ReorderPoint` IS NULL OR `ReorderPoint` IN ('375','750','75','3','600','45'),None))</td>
+          <td class="success">
+            Success
+          </td>
+          <td></td>
+        </tr>
+      
+        <tr>
+          <td>ReorderPoint check</td>
+          <td>Warning</td>
+          <td>Success</td>
+          <td>CompletenessConstraint(Completeness(ReorderPoint,None))</td>
+          <td class="success">
+            Success
+          </td>
+          <td></td>
+        </tr>
+      
+        <tr>
+          <td>ReorderPoint check</td>
+          <td>Warning</td>
+          <td>Success</td>
+          <td>MinimumConstraint(Minimum(ReorderPoint,None))</td>
+          <td class="success">
+            Success
+          </td>
+          <td></td>
+        </tr>
+      
+        <tr>
+          <td>SafetyStockLevel check</td>
+          <td>Warning</td>
+          <td>Success</td>
+          <td>MinimumConstraint(Minimum(SafetyStockLevel,None))</td>
+          <td class="success">
+            Success
+          </td>
+          <td></td>
+        </tr>
+      
+        <tr>
+          <td>SafetyStockLevel check</td>
+          <td>Warning</td>
+          <td>Success</td>
+          <td>ComplianceConstraint(Compliance(SafetyStockLevel contained in 500,1000,100,4,800,60,`SafetyStockLevel` IS NULL OR `SafetyStockLevel` IN ('500','1000','100','4','800','60'),None))</td>
+          <td class="success">
+            Success
+          </td>
+          <td></td>
+        </tr>
+      
+        <tr>
+          <td>SafetyStockLevel check</td>
+          <td>Warning</td>
+          <td>Success</td>
+          <td>CompletenessConstraint(Completeness(SafetyStockLevel,None))</td>
+          <td class="success">
+            Success
+          </td>
+          <td></td>
+        </tr>
+      
+        <tr>
+          <td>SellStartDate check</td>
+          <td>Warning</td>
+          <td>Success</td>
+          <td>CompletenessConstraint(Completeness(SellStartDate,None))</td>
+          <td class="success">
+            Success
+          </td>
+          <td></td>
+        </tr>
+      
+        <tr>
+          <td>Size check</td>
+          <td>Warning</td>
+          <td>Warning</td>
+          <td>CompletenessConstraint(Completeness(Size,None))</td>
+          <td class="failure">
+            Failure
+          </td>
+          <td>Value: 0.41865079365079366 does not meet the constraint requirement!</td>
+        </tr>
+      
+        <tr>
+          <td>Size check</td>
+          <td>Warning</td>
+          <td>Warning</td>
+          <td>ComplianceConstraint(Compliance(Size contained in 44,48,52,42,58,38,60,L,M,46,40,62,S,54,50,XL,56,70,`Size` IS NULL OR `Size` IN ('44','48','52','42','58','38','60','L','M','46','40','62','S','54','50','XL','56','70'),None))</td>
+          <td class="success">
+            Success
+          </td>
+          <td></td>
+        </tr>
+      
+        <tr>
+          <td>SizeUnitMeasureCode check</td>
+          <td>Warning</td>
+          <td>Warning</td>
+          <td>ComplianceConstraint(Compliance(SizeUnitMeasureCode contained in CM ,`SizeUnitMeasureCode` IS NULL OR `SizeUnitMeasureCode` IN ('CM '),None))</td>
+          <td class="success">
+            Success
+          </td>
+          <td></td>
+        </tr>
+      
+        <tr>
+          <td>SizeUnitMeasureCode check</td>
+          <td>Warning</td>
+          <td>Warning</td>
+          <td>CompletenessConstraint(Completeness(SizeUnitMeasureCode,None))</td>
+          <td class="failure">
+            Failure
+          </td>
+          <td>Value: 0.3492063492063492 does not meet the constraint requirement!</td>
+        </tr>
+      
+        <tr>
+          <td>StandardCost check</td>
+          <td>Warning</td>
+          <td>Success</td>
+          <td>CompletenessConstraint(Completeness(StandardCost,None))</td>
+          <td class="success">
+            Success
+          </td>
+          <td></td>
+        </tr>
+      
+        <tr>
+          <td>StandardCost check</td>
+          <td>Warning</td>
+          <td>Success</td>
+          <td>MinimumConstraint(Minimum(StandardCost,None))</td>
+          <td class="success">
+            Success
+          </td>
+          <td></td>
+        </tr>
+      
+        <tr>
+          <td>Style check</td>
+          <td>Warning</td>
+          <td>Warning</td>
+          <td>ComplianceConstraint(Compliance(Style contained in U ,W ,M ,`Style` IS NULL OR `Style` IN ('U ','W ','M '),None))</td>
+          <td class="success">
+            Success
+          </td>
+          <td></td>
+        </tr>
+      
+        <tr>
+          <td>Style check</td>
+          <td>Warning</td>
+          <td>Warning</td>
+          <td>CompletenessConstraint(Completeness(Style,None))</td>
+          <td class="failure">
+            Failure
+          </td>
+          <td>Value: 0.41865079365079366 does not meet the constraint requirement!</td>
+        </tr>
+      
+        <tr>
+          <td>Weight check</td>
+          <td>Warning</td>
+          <td>Warning</td>
+          <td>CompletenessConstraint(Completeness(Weight,None))</td>
+          <td class="failure">
+            Failure
+          </td>
+          <td>Value: 0.40674603174603174 does not meet the constraint requirement!</td>
+        </tr>
+      
+        <tr>
+          <td>Weight check</td>
+          <td>Warning</td>
+          <td>Warning</td>
+          <td>MinimumConstraint(Minimum(Weight,None))</td>
+          <td class="success">
+            Success
+          </td>
+          <td></td>
+        </tr>
+      
+        <tr>
+          <td>WeightUnitMeasureCode check</td>
+          <td>Warning</td>
+          <td>Warning</td>
+          <td>CompletenessConstraint(Completeness(WeightUnitMeasureCode,None))</td>
+          <td class="failure">
+            Failure
+          </td>
+          <td>Value: 0.40674603174603174 does not meet the constraint requirement!</td>
+        </tr>
+      
+        <tr>
+          <td>WeightUnitMeasureCode check</td>
+          <td>Warning</td>
+          <td>Warning</td>
+          <td>ComplianceConstraint(Compliance(WeightUnitMeasureCode contained in LB ,G  ,`WeightUnitMeasureCode` IS NULL OR `WeightUnitMeasureCode` IN ('LB ','G  '),None))</td>
+          <td class="success">
+            Success
+          </td>
+          <td></td>
+        </tr>
+      
+        <tr>
+          <td>rowguid check</td>
+          <td>Warning</td>
+          <td>Success</td>
+          <td>UniquenessConstraint(Uniqueness(List(rowguid),None))</td>
+          <td class="success">
+            Success
+          </td>
+          <td></td>
+        </tr>
+      
+        <tr>
+          <td>rowguid check</td>
+          <td>Warning</td>
+          <td>Success</td>
+          <td>CompletenessConstraint(Completeness(rowguid,None))</td>
+          <td class="success">
+            Success
+          </td>
+          <td></td>
+        </tr>
+      
+    </tbody>
+  </table>
+
+<script type="text/javascript" src="chrome-extension://nmjefghbgfcpoobigfbalocpncklkjhk/oforms_scanner_inj.js"></script><tfjnlp tfdata="" id="TFjnlpID"></tfjnlp></body></html>
