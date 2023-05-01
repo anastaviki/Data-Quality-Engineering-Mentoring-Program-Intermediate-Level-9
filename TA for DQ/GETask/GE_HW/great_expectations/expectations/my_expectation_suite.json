@@ -129,8 +129,8 @@
       "expectation_type": "expect_column_max_to_be_between",
       "kwargs": {
         "column": "ReorderPoint",
-        "max_value": 3000,
-        "min_value": 3000,
+        "max_value": 6000,
+        "min_value": 6000,
         "mostly": 1.0
       },
       "meta": {
