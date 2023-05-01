@@ -1,0 +1,30 @@
+name: test_checkpoint
+config_version: 1.0
+template_name:
+module_name: great_expectations.checkpoint
+class_name: Checkpoint
+run_name_template: '%Y-%M-foo-bar-template'
+expectation_suite_name:
+batch_request: {}
+action_list: []
+evaluation_parameters: {}
+runtime_configuration: {}
+validations:
+  - action_list:
+      - name: <ACTION NAME FOR STORING VALIDATION RESULTS>
+        action:
+          class_name: StoreValidationResultAction
+      - name: <ACTION NAME FOR STORING EVALUATION PARAMETERS>
+        action:
+          class_name: StoreEvaluationParametersAction
+      - name: <ACTION NAME FOR UPDATING DATA DOCS>
+        action:
+          class_name: UpdateDataDocsAction
+    batch_request:
+      datasource_name: my_mssql_datasource
+      data_connector_name: default_inferred_data_connector_name
+      data_asset_name: Production.Product
+    expectation_suite_name: my_expectation_suite
+profilers: []
+ge_cloud_id:
+expectation_suite_ge_cloud_id:
