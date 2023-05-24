@@ -66,10 +66,9 @@ def open_url_in_browser(url):
             EC.presence_of_element_located((By.ID, "run_all_cells"))
         )
         ActionChains(driver).move_to_element(run_all_cells_option).click().perform()
-        print('Notebook run succcesfully')
+        print('Notebook run succesfully')
         # Wait for check the results
         time.sleep(10)
-
     except:
         print("Timeout too long")
     finally:
@@ -78,5 +77,5 @@ def open_url_in_browser(url):
         print("Close driver")
 
 
-url = "https://dqelearn.trainings.dlabanalytics.com/aviktarovich/notebooks/AViktarovich%20Final%20Task%202.ipynb"
-open_url_in_browser(url)
+link = "https://dqelearn.trainings.dlabanalytics.com/aviktarovich/notebooks/AViktarovich%20Final%20Task%202.ipynb"
+open_url_in_browser(link)
