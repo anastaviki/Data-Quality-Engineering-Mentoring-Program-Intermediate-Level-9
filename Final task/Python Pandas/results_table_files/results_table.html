@@ -23,7 +23,7 @@ th, td {
     <tr>
       <td>1</td>
       <td>Carriers</td>
-      <td>Validity</td>
+      <td>Completeness</td>
       <td>[code, description]</td>
       <td>Passed</td>
       <td></td>
@@ -31,7 +31,7 @@ th, td {
     <tr>
       <td>2</td>
       <td>Airports</td>
-      <td>Validity</td>
+      <td>Completeness</td>
       <td>[iata, airport, city, state, country, lat, long]</td>
       <td>Failed</td>
       <td>Missing columns: long</td>
@@ -39,7 +39,7 @@ th, td {
     <tr>
       <td>3</td>
       <td>Flights</td>
-      <td>Validity</td>
+      <td>Completeness</td>
       <td>[Year, Month, DayofMonth, DayOfWeek, DepTime, CRSDepTime, ArrTime, CRSArrTime, UniqueCarrier, FlightNum, TailNum, ActualElapsedTime, CRSElapsedTime, AirTime, ArrDelay, DepDelay, Origin, Dest, Distance, TaxiIn, TaxiOut, Cancelled, CancellationCode, Diverted, CarrierDelay, WeatherDelay, NASDelay, SecurityDelay, LateAircraftDelay]</td>
       <td>Passed</td>
       <td></td>
@@ -479,7 +479,7 @@ th, td {
     <tr>
       <td>58</td>
       <td>Flights</td>
-      <td>Consistency</td>
+      <td>Validity</td>
       <td>Cancelled</td>
       <td>Failed</td>
       <td>[{'Cancelled': ''}]</td>
@@ -487,7 +487,7 @@ th, td {
     <tr>
       <td>59</td>
       <td>Flights</td>
-      <td>Consistency</td>
+      <td>Validity</td>
       <td>Diverted</td>
       <td>Failed</td>
       <td>[{'Diverted': '2'}, {'Diverted': '2'}, {'Diverted': '3'}, {'Diverted': ''}]</td>
